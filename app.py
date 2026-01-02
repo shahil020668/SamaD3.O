@@ -23,9 +23,18 @@ from dotenv import load_dotenv
 load_dotenv()
 
 if not firebase_admin._apps:
-    cred_dict = json.loads(os.getenv("FIREBASE_CREDENTIALS")) 
-    cred = credentials.Certificate(cred_dict)
-    firebase_admin.initialize_app(cred)
+    raw_creds = os.getenv("FIREBASE_CREDENTIALS")
+    
+    if raw_creds:
+        try:
+            cred_dict = json.loads(raw_creds, strict=False)
+            
+            cred = credentials.Certificate(cred_dict)
+            firebase_admin.initialize_app(cred)
+        except json.JSONDecodeError as e:
+            st.error(f"Failed to parse Firebase credentials: {e}")
+    else:
+        st.error("FIREBASE_CREDENTIALS environment variable not found.")
 
 
 def app():
