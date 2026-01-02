@@ -26,33 +26,33 @@ def app():
         threadid = uuid.uuid4()
         return threadid
 
-    if 'messages_history' not in st.session_state:
-        st.session_state['messages_history'] = []
+    if 'messages_history1' not in st.session_state:
+        st.session_state['messages_history1'] = []
 
-    if 'thread_id' not in st.session_state:
-        st.session_state['thread_id'] = generate_threadid()
+    if 'thread_id1' not in st.session_state:
+        st.session_state['thread_id1'] = generate_threadid()
 
-    if 'chat_threads' not in st.session_state:
-        st.session_state['chat_threads'] = []
+    if 'chat_threads1' not in st.session_state:
+        st.session_state['chat_threads1'] = []
 
-    def add_thread(thread_id):
-        if thread_id not in st.session_state['chat_threads']:
-            st.session_state['chat_threads'].append(thread_id)
+    def add_thread(thread_id1):
+        if thread_id1 not in st.session_state['chat_threads1']:
+            st.session_state['chat_threads1'].append(thread_id1)
 
     # when reloading 
 
-    add_thread(st.session_state['thread_id'])
+    add_thread(st.session_state['thread_id1'])
 
-    CONFIG = {"configurable": {"thread_id": st.session_state['thread_id']}}
+    CONFIG = {"configurable": {"thread_id": st.session_state['thread_id1']}}
 
-    def load_conversation(thread_id):
-        return chatbot.get_state(config={"configurable": {"thread_id": thread_id}}).values['messages']
+    def load_conversation(thread_id1):
+        return chatbot.get_state(config={"configurable": {"thread_id": thread_id1}}).values['messages']
 
     def reset_chat():
-        thread_id = generate_threadid()
-        st.session_state['thread_id'] = thread_id
-        add_thread(thread_id)
-        st.session_state['messages_history'] = []
+        thread_id1 = generate_threadid()
+        st.session_state['thread_id1'] = thread_id1
+        add_thread(thread_id1)
+        st.session_state['messages_history1'] = []
 
     st.sidebar.title("SamaD2.O")
     if st.sidebar.button("New chat"):
@@ -61,19 +61,19 @@ def app():
 
 
 
-    for thread_id in st.session_state['chat_threads'][::-1]:
-        if st.sidebar.button(str(thread_id)):
-            st.session_state['thread_id'] = thread_id
-            messages = load_conversation(thread_id)
+    for thread_id1 in st.session_state['chat_threads1'][::-1]:
+        if st.sidebar.button(str(thread_id1)):
+            st.session_state['thread_id1'] = thread_id1
+            messages = load_conversation(thread_id1)
             if messages:
-                st.session_state['messages_history'] = messages
+                st.session_state['messages_history1'] = messages
             else:
-                st.session_state['messages_history'] = []
+                st.session_state['messages_history1'] = []
 
 
     st.title("💬 SamaD2.O")
 
-    for message in st.session_state['messages_history']:
+    for message in st.session_state['messages_history1']:
         if isinstance(message, HumanMessage):
             with st.chat_message('user'):
                 st.write(message.content)
@@ -104,7 +104,7 @@ def app():
 
 
     if user_input:
-        st.session_state['messages_history'].append(HumanMessage(content=user_input))
+        st.session_state['messages_history1'].append(HumanMessage(content=user_input))
         with st.chat_message('user'):
             st.write(user_input)
         
@@ -113,7 +113,7 @@ def app():
 
         with st.chat_message('assistant'):
             ai_message = stream_ai_response(chatbot, user_input, CONFIG)
-        st.session_state['messages_history'].append(ai_message)
+        st.session_state['messages_history1'].append(ai_message)
 
 
     @st.dialog("🔐 Login / Signup")
@@ -127,33 +127,33 @@ def app():
         email = st.text_input("Email")
         password = st.text_input("Password", type="password")
 
-        col1, col2 = st.columns(2)
+        # col1, col2 = st.columns(2)
 
-        with col1:
-            if st.button("❌ Cancel"):
-                st.session_state.show_auth = False
-                # st.rerun()
+        # with col1:
+        #     if st.button("❌ Cancel"):
+        #         st.session_state.show_auth = False
+        #         # st.rerun()
 
-        with col2:
-            if st.button(mode):
-                try:
-                    if mode == "Login":
-                        data = login(email, password)
-                        user = verify_token(data["idToken"])
+        
+        if st.button(mode):
+            try:
+                if mode == "Login":
+                    data = login(email, password)
+                    user = verify_token(data["idToken"])
 
-                        st.session_state.user = user
-                        st.session_state.logged_in = True
-                        st.session_state.show_auth = False
-                        st.session_state.signout = True
-                        st.session_state.signedout = True
-                        st.rerun()
+                    st.session_state.user = user
+                    st.session_state.logged_in = True
+                    st.session_state.show_auth = False
+                    st.session_state.signout = True
+                    st.session_state.signedout = True
+                    st.rerun()
 
-                    else:
-                        signup(email, password)
-                        st.success("Signup successful. Please login.")
+                else:
+                    signup(email, password)
+                    st.success("Signup successful. Please login.")
 
-                except Exception as e:
-                    st.error(e)
+            except Exception as e:
+                st.error(e)
 
     if st.session_state.show_auth:
         auth_dialog()

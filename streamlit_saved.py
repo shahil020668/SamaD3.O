@@ -6,13 +6,14 @@ import time
 from streamlit_cookies_manager.cookie_manager import CookiesNotReady
 
 
-
 def app():
-        
-    if st.button("Logout"):
-        st.session_state.signout = False
-        st.session_state.signedout = False
-        st.rerun() 
+    c1, c2 = st.columns([6, 1])
+    with c2:
+        if st.button("Logout"):
+            st.session_state.signout = False
+            st.session_state.signedout = False
+            
+            st.rerun() 
 
     def generate_threadid() -> str:
         threadid = uuid.uuid4()
