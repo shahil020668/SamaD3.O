@@ -7,7 +7,7 @@ import firebase_admin
 from firebase_admin import credentials
 from auth import login, signup, verify_token
 from dotenv import load_dotenv
-from streamlit_cookies_manager.cookie_manager import CookiesNotReady
+# from streamlit_cookies_manager.cookie_manager import CookiesNotReady
 
 
 load_dotenv()

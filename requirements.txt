@@ -33,3 +33,5 @@ torch
 pydantic
 
 langgraph-checkpoint-sqlite
+
+firebase_admin
