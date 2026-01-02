@@ -54,7 +54,7 @@ def app():
         add_thread(thread_id1)
         st.session_state['messages_history1'] = []
 
-    st.sidebar.title("SamaD2.O")
+    st.sidebar.title("SamaD3.O")
     if st.sidebar.button("New chat"):
         reset_chat()
     st.sidebar.header("My conversation")
@@ -71,7 +71,7 @@ def app():
                 st.session_state['messages_history1'] = []
 
 
-    st.title("💬 SamaD2.O")
+    st.title("💬 SamaD3.O")
 
     for message in st.session_state['messages_history1']:
         if isinstance(message, HumanMessage):
