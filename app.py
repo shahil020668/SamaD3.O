@@ -23,7 +23,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 if not firebase_admin._apps:
-    cred_dict = json.loads(os.getenv("FIREBASE_CREDENTIALS"))
+    cred_dict = json.loads(os.getenv("FIREBASE_CREDENTIALS")) or json.loads(st.secrets["FIREBASE_CREDENTIALS"])
     cred = credentials.Certificate(cred_dict)
     firebase_admin.initialize_app(cred)
 
