@@ -3,7 +3,6 @@ from db_saved import chatbot, fetch_all_thread
 from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 import uuid
 import time
-from streamlit_cookies_manager.cookie_manager import CookiesNotReady
 
 
 def app():
