@@ -1,10 +1,10 @@
-# SamaD3.O - Multi-AI Chatbot with Conversation History
+# SamaD3.O
 
-A Streamlit-based chatbot application that integrates multiple AI models (HuggingFace, Google Gemini) using LangGraph for state management. Features user authentication via Firebase and persistent conversation storage.
+A Streamlit-based chatbot application that uses API of AI models (Google Gemini, HuggingFace) using LangGraph for state management. Features user authentication via Firebase and persistent conversation storage.
 
 ## 🌟 Features
 
-- **Multi-AI Model Support**: Integrates HuggingFace (DeepSeek-V3.2) and Google Gemini
+- **Chat model**: like chat GPT, gemini 
 - **User Authentication**: Firebase-based login/signup with session management
 - **Dual Chat Modes**:
   - **Unsaved Chat**: Anonymous conversations (temporary, no login required)
@@ -45,7 +45,7 @@ A Streamlit-based chatbot application that integrates multiple AI models (Huggin
 2. **Create virtual environment**
    ```bash
    python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   source venv/bin/activate
    ```
 
 3. **Install dependencies**
@@ -116,9 +116,6 @@ A Streamlit-based chatbot application that integrates multiple AI models (Huggin
 - **API key issues**: Check HuggingFace and Google API keys are valid
 - **Database errors**: Ensure `user_dbs/` directory has write permissions
 
-## 📄 License
-
-[Add your license here]
 
 ## 👤 Author
 
