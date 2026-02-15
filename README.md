@@ -1,5 +1,7 @@
 # SamaD3.O
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://samad3ai.streamlit.app)
+
 A Streamlit-based chatbot application that uses API of AI models (Google Gemini, HuggingFace) using LangGraph for state management. Features user authentication via Firebase and persistent conversation storage.
 
 ## 🌟 Features
